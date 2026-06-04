@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrome-ARF 帮助中心</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Noto+Serif+SC:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --forest: #2d6a4f;
+            --forest-light: #40916c;
+            --forest-dark: #1b4332;
+            --leaf-green: #52b788;
+            --leaf-light: #74c69d;
+            --leaf-pale: #b7e4c7;
+            --sky-blue: #a2d2ff;
+            --morning-gold: #ffd166;
+            --berry: #e56b6f;
+            --bg-sky: linear-gradient(180deg, #caf0f8 0%, #e8f8f5 30%, #f0fdf4 60%, #fffbeb 100%);
+            --bg-card: rgba(255, 255, 255, 0.92);
+            --text-primary: #1b4332;
+            --text-secondary: #4a7c59;
+            --text-muted: #8faa9b;
+            --border: rgba(45, 106, 79, 0.12);
+            --shadow-sm: 0 2px 12px rgba(45, 106, 79, 0.08);
+            --shadow-md: 0 8px 24px rgba(45, 106, 79, 0.12);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-sky);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 28px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--leaf-green);
+            text-decoration: none;
+            font-weight: 500;
+            margin-bottom: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--forest);
+            transform: translateX(-4px);
+        }
+
+        .page-header {
+            text-align: center;
+            margin-bottom: 48px;
+        }
+
+        .page-header h1 {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 42px;
+            color: var(--forest-dark);
+            margin-bottom: 12px;
+        }
+
+        .page-header p {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .help-section {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 36px;
+            margin-bottom: 28px;
+            border: 1px solid var(--border);
+            backdrop-filter: blur(20px);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .help-section h2 {
+            font-size: 22px;
+            color: var(--forest);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .help-section h2 i {
+            color: var(--leaf-green);
+        }
+
+        .faq-item {
+            margin-bottom: 24px;
+            padding: 20px;
+            background: rgba(82, 183, 136, 0.04);
+            border-radius: 14px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .faq-item:hover {
+            background: rgba(82, 183, 136, 0.08);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .faq-question {
+            font-weight: 600;
+            color: var(--forest-dark);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .faq-question i {
+            color: var(--morning-gold);
+            margin-top: 4px;
+        }
+
+        .faq-answer {
+            color: var(--text-secondary);
+            padding-left: 28px;
+        }
+
+        .faq-answer ul {
+            margin: 8px 0;
+            padding-left: 20px;
+        }
+
+        .faq-answer li {
+            margin-bottom: 6px;
+        }
+
+        .faq-answer code {
+            background: rgba(82, 183, 136, 0.1);
+            padding: 2px 8px;
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+            color: var(--forest);
+        }
+
+        .troubleshoot-steps {
+            counter-reset: step;
+            padding-left: 0;
+            list-style: none;
+        }
+
+        .troubleshoot-steps li {
+            counter-increment: step;
+            margin-bottom: 16px;
+            padding-left: 36px;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .troubleshoot-steps li::before {
+            content: counter(step);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 24px;
+            height: 24px;
+            background: var(--leaf-green);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .shortcut-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 16px 0;
+        }
+
+        .shortcut-table th, .shortcut-table td {
+            padding: 12px 16px;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .shortcut-table th {
+            background: rgba(82, 183, 136, 0.08);
+            color: var(--forest);
+            font-weight: 600;
+            font-size: 13px;
+            text-transform: uppercase;
+        }
+
+        .shortcut-table td {
+            color: var(--text-secondary);
+        }
+
+        .kbd {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(27, 67, 50, 0.08);
+            border-radius: 6px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--forest-dark);
+            border: 1px solid var(--border);
+        }
+
+        .contact-box {
+            background: linear-gradient(135deg, rgba(82, 183, 136, 0.1), rgba(162, 210, 255, 0.1));
+            padding: 24px;
+            border-radius: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact-box p {
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--bg-card);
+            border-radius: 12px;
+            color: var(--forest);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        .contact-link:hover {
+            background: var(--leaf-green);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 40px 0;
+            color: var(--text-muted);
+            font-size: 13px;
+        }
+
+        .footer a {
+            color: var(--leaf-green);
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 24px 16px;
+            }
+
+            .page-header h1 {
+                font-size: 32px;
+            }
+
+            .help-section {
+                padding: 24px;
+            }
+
+            .contact-links {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">
+            <i class="fas fa-arrow-left"></i> 返回主页
+        </a>
+
+        <div class="page-header">
+            <h1><i class="fas fa-question-circle"></i> 帮助中心</h1>
+            <p>常见问题解答与故障排除指南</p>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-bolt"></i> 快速入门</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>如何开始使用 Chrome-ARF？</span>
+                </div>
+                <div class="faq-answer">
+                    <p>只需三步即可开始：</p>
+                    <ol>
+                        <li>运行 <code>python refresh_web.py</code></li>
+                        <li>在浏览器打开 <code>http://localhost:5000</code></li>
+                        <li>点击「启动调试Chrome」按钮</li>
+                    </ol>
+                    <p>程序会自动启动 Chrome 并连接到调试端口。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>刷新间隔可以设置多少？</span>
+                </div>
+                <div class="faq-answer">
+                    <p>支持的范围：<strong>5秒 到 3600秒（1小时）</strong></p>
+                    <p>常用预设：30秒、1分钟、5分钟、10分钟</p>
+                    <p>也可以直接输入自定义数值。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>如何刷新指定的标签页？</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Chrome-ARF 会自动刷新<strong>当前获得焦点的标签页</strong>。</p>
+                    <p>切换到你想刷新的标签页，程序会自动识别并刷新它。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-wrench"></i> 故障排除</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>Chrome 启动失败</span>
+                </div>
+                <div class="faq-answer">
+                    <p>可能的原因及解决方案：</p>
+                    <ul>
+                        <li><strong>Chrome 未安装</strong>：请先安装 Google Chrome 浏览器</li>
+                        <li><strong>端口被占用</strong>：关闭占用 9222 端口的程序，或程序会自动切换端口</li>
+                        <li><strong>权限不足</strong>：以管理员权限运行程序</li>
+                        <li><strong>已有 Chrome 实例</strong>：关闭所有 Chrome 窗口后重试</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>无法连接到 Chrome</span>
+                </div>
+                <div class="faq-answer">
+                    <p>请按以下步骤排查：</p>
+                    <ol class="troubleshoot-steps">
+                        <li>检查 Chrome 是否以调试模式启动（任务管理器中应有 <code>--remote-debugging-port</code> 参数）</li>
+                        <li>检查防火墙是否阻止了本地连接</li>
+                        <li>尝试更换端口（点击「启动调试Chrome」会自动尝试其他端口）</li>
+                        <li>重启程序后重试</li>
+                    </ol>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>刷新不生效</span>
+                </div>
+                <div class="faq-answer">
+                    <p>可能的原因：</p>
+                    <ul>
+                        <li><strong>标签页已关闭</strong>：刷新的标签页已关闭，请切换到新标签页</li>
+                        <li><strong>页面限制</strong>：某些页面可能阻止了程序化刷新</li>
+                        <li><strong>WebSocket 断开</strong>：点击「停止」后重新「开始刷新」</li>
+                        <li><strong>Chrome 崩溃</strong>：重新启动 Chrome 调试实例</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span>页面显示异常</span>
+                </div>
+                <div class="faq-answer">
+                    <p>尝试以下解决方案：</p>
+                    <ul>
+                        <li>清除浏览器缓存（<kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Delete</kbd>）</li>
+                        <li>使用 Chrome/Edge/Firefox 等现代浏览器访问</li>
+                        <li>检查 JavaScript 是否被禁用</li>
+                        <li>刷新页面（<kbd>F5</kbd>）</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-keyboard"></i> 快捷键</h2>
+
+            <table class="shortcut-table">
+                <thead>
+                    <tr>
+                        <th>快捷键</th>
+                        <th>功能</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">Enter</kbd></td>
+                        <td>开始刷新</td>
+                    </tr>
+                    <tr>
+                        <td><kbd class="kbd">Ctrl</kbd> + <kbd class="kbd">.</kbd></td>
+                        <td>停止刷新</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-info-circle"></i> 技术说明</h2>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>什么是 CDP？</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>Chrome DevTools Protocol (CDP)</strong> 是 Chrome 浏览器提供的调试协议。</p>
+                    <p>它允许程序化控制浏览器，包括：</p>
+                    <ul>
+                        <li>获取页面信息</li>
+                        <li>执行 JavaScript</li>
+                        <li>控制页面导航</li>
+                        <li>监控网络请求</li>
+                    </ul>
+                    <p>Chrome-ARF 使用 CDP 的 <code>Page.reload</code> 命令实现刷新功能。</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>数据安全吗？</span>
+                </div>
+                <div class="faq-answer">
+                    <p><strong>完全安全。</strong></p>
+                    <ul>
+                        <li>所有通信仅在本地进行（127.0.0.1）</li>
+                        <li>不收集任何用户数据</li>
+                        <li>不连接外部服务器</li>
+                        <li>使用独立的调试配置文件，不影响正常 Chrome 数据</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">
+                    <i class="fas fa-chevron-right"></i>
+                    <span>支持哪些操作系统？</span>
+                </div>
+                <div class="faq-answer">
+                    <p>Chrome-ARF 支持：</p>
+                    <ul>
+                        <li><strong>Windows</strong> - Windows 10/11</li>
+                        <li><strong>macOS</strong> - macOS 10.15+</li>
+                        <li><strong>Linux</strong> - Ubuntu/Debian/CentOS 等主流发行版</li>
+                    </ul>
+                    <p>需要 Python 3.6+ 和 Google Chrome 浏览器。</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="help-section">
+            <h2><i class="fas fa-envelope"></i> 获取帮助</h2>
+
+            <div class="contact-box">
+                <p>遇到问题？需要更多帮助？</p>
+                <div class="contact-links">
+                    <a href="https://github.com/leyinsec/Chrome_ARF/issues" target="_blank" class="contact-link">
+                        <i class="fab fa-github"></i> 提交 Issue
+                    </a>
+                    <a href="https://github.com/leyinsec/Chrome_ARF" target="_blank" class="contact-link">
+                        <i class="fas fa-code"></i> 查看源码
+                    </a>
+                    <a href="/docs" class="contact-link">
+                        <i class="fas fa-book"></i> 阅读文档
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><a href="/">返回首页</a> · <a href="/docs">技术文档</a></p>
+            <p style="margin-top: 12px;">Chrome-ARF v2.0 · Made with ❤️</p>
+        </div>
+    </div>
+</body>
+</html>
